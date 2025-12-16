@@ -25,13 +25,6 @@ The application is built with a powerful **MERN stack (MongoDB, Express, React, 
 * **Search & Filtering:** Easily locate files by name or filter by type (image, document, video, etc.).
 * **Modern UI:** Built with React and styled using the utility-first framework, Tailwind CSS.
 
-## 🖼️ Demo (Animation Placeholder)
-
-*(You can replace the placeholder text below with a GIF or animated screenshot demonstrating the main features like file upload, folder creation, and sharing. This will significantly improve the visual appeal of your README.)*
-
-[Insert GIF/Animation of the Application Dashboard Here]
-
-
 ## 🛠️ Tech Stack
 
 ### Backend (`drive-backend`)
@@ -185,6 +178,7 @@ GOOGLE_CALLBACK_URL=http://localhost:5000/api/auth/google/callback
 ### --- File Storage (Example) ---
 ### This is a placeholder, actual implementation details will vary
 ### For development, files are likely stored locally by Multer
+
 
 
 
