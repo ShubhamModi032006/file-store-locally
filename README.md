@@ -14,11 +14,16 @@ This repository contains a full-stack cloud storage application designed for sec
 
 ## ✨ Live Demo / Animation
 
-> **ACTION REQUIRED:** To make your README look great as requested, replace the placeholder text below with a GIF or a short video demonstrating the application's core functionality (e.g., login, file upload, folder creation).
->
-> **Example Markdown for adding your GIF:**
-> `![Application Demo](https://raw.githubusercontent.com/your-username/your-repo/main/assets/demo.gif)`
+## 🚀 Features
 
+- Secure multi-file upload with preview support  
+- Permission-based file access and link-based file sharing  
+- Recycle bin functionality with delete and restore workflows  
+- Modular and scalable REST API architecture  
+- Prevention of unauthorized file access  
+- Real-time UI updates for better user experience  
+
+---
 **[ ADD YOUR DEMO GIF/ANIMATION HERE ]**
 
 ---
@@ -127,3 +132,4 @@ Follow these steps to set up the project locally.
     The frontend will typically run on `http://localhost:5173` or `http://localhost:3000`.
 
 You are now ready to use the application!
+
