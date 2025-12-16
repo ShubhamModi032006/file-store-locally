@@ -10,139 +10,112 @@
 [![License: ISC](https://img.shields.io/badge/License-ISC-blue.svg)](https://opensource.org/licenses/ISC)
 
 ---
+## ✨ Overview
 
-## 📝 Project Overview
+MyDrive is a modern, full-stack application designed to emulate the core functionality of popular cloud storage services like Google Drive or Dropbox. It allows users to securely store, organize, and share their files and folders.
 
-SecureDrive is a modern, full-stack cloud storage application built with the MERN stack. It provides a secure and scalable platform for users to manage, organize, and share their digital files and folders with an emphasis on a clean, real-time user experience.
+The application is built with a powerful **MERN stack (MongoDB, Express, React, Node.js)** architecture, ensuring a fast, scalable, and robust experience.
 
----
+## 💡 Key Features
 
-## ✨ Live Demo / Preview
+* **Authentication:** Secure registration, login, and Google OAuth integration.
+* **File Management:** Upload, download, view, rename, and delete files.
+* **Folder Organization:** Create, view, rename, and delete custom folders.
+* **Trash System:** Move files/folders to trash and restore them, or permanently delete them.
+* **File Sharing:** Generate public, revocable, and optionally password-protected share links.
+* **Search & Filtering:** Easily locate files by name or filter by type (image, document, video, etc.).
+* **Modern UI:** Built with React and styled using the utility-first framework, Tailwind CSS.
 
-> **🖼️ Add Your Demo Here:** To make your README shine, replace this placeholder with a GIF or a video link showing the application in action (e.g., login, file upload, folder creation).
+## 🖼️ Demo (Animation Placeholder)
 
-**[ ADD YOUR DEMO GIF/ANIMATION HERE ]**
+*(You can replace the placeholder text below with a GIF or animated screenshot demonstrating the main features like file upload, folder creation, and sharing. This will significantly improve the visual appeal of your README.)*
 
----
+[Insert GIF/Animation of the Application Dashboard Here]
 
-## 🚀 Key Features
 
-A comprehensive suite of tools for robust file management:
-
-### Security & Authentication
-* 🔒 **Robust Authentication:** Secure user registration, login, and session management using JSON Web Tokens (JWT) and `bcryptjs`.
-* 🔑 **Google OAuth 2.0:** Seamless integration for quick and easy social sign-in.
-* 🛡️ **Unauthorized Access Prevention:** Strict backend checks ensure data is accessible only by the owning user or via a valid share link.
-* 🚦 **Security Focus:** Enhanced security headers and network compression via `helmet` and `compression`.
-
-### File Management
-* 📁 **Full File Explorer:** Create, rename, move, and delete files and folders with intuitive controls.
-* 📤 **Secure Multi-File Upload:** Handle multiple uploads simultaneously with real-time progress and preview support.
-* 🔗 **Permission-Based Sharing:** Generate public, read-only links for files and folders, allowing controlled external access.
-* 🗑️ **Recycle Bin (Trash):** Functionality for soft-deletion, allowing files to be restored or permanently deleted.
-
-### Architecture & UX
-* ⚙️ **Modular & Scalable REST API:** A well-structured backend designed for maintainability and growth.
-* 🔄 **Real-Time UI Updates:** The frontend delivers a responsive experience with immediate feedback on file operations.
-
----
-
-## 💻 Tech Stack
+## 🛠️ Tech Stack
 
 ### Backend (`drive-backend`)
 | Category | Technology | Key Dependencies |
 | :--- | :--- | :--- |
-| **Runtime** | Node.js | `express` |
+| **Runtime** | Node.js | - |
+| **Framework** | Express | `express`, `compression`, `helmet`, `cors` |
 | **Database** | MongoDB | `mongoose` |
-| **Authentication** | JWT, Google OAuth | `jsonwebtoken`, `passport-jwt`, `passport-google-oauth20`, `bcryptjs` |
+| **Auth** | JWT / OAuth 2.0 | `jsonwebtoken`, `bcryptjs`, `passport`, `passport-google-oauth20`, `passport-jwt` |
+| **Validation** | Data Validation | `express-validator` |
 | **File Handling** | File Uploads | `multer` |
-| **Validation** | Data Integrity | `express-validator` |
 
 ### Frontend (`drive-frontend`)
 | Category | Technology | Key Dependencies |
 | :--- | :--- | :--- |
 | **Framework** | React | `react`, `react-dom` |
-| **Styling** | Utility-First CSS | `tailwindcss`, `autoprefixer` |
-| **Build Tool** | Modern Bundler | `Vite` |
-| **Routing** | Declarative Routing | `react-router-dom` |
-| **Networking** | HTTP Client | `axios` |
-| **Icons** | Clean Icons | `lucide-react` |
+| **Build Tool** | Vite | `@vitejs/plugin-react` |
+| **Styling** | Tailwind CSS | `tailwindcss`, `autoprefixer`, `postcss` |
+| **Routing** | React Router | `react-router-dom` |
+| **HTTP Client** | API Calls | `axios` |
+| **Icons** | Icon Library | `lucide-react` |
 
----
+## 🚀 Getting Started
 
-## ⚙️ Getting Started
+### Prerequisites
 
-Follow these steps to get your development environment running locally.
+Before running the application, ensure you have the following installed:
 
-### 📋 Prerequisites
+* Node.js (v18+)
+* MongoDB (or a connection string for MongoDB Atlas)
+* Git
 
-You will need the following installed:
+### Installation & Setup
 
-* [Node.js](https://nodejs.org/) (LTS version recommended)
-* A running instance of **MongoDB** (local or cloud-based like Atlas)
-* **Google API Credentials** (Client ID and Secret) for the OAuth features.
+1.  **Clone the repository:**
+    ```bash
+    git clone <your-repo-url>
+    cd <repo-name>
+    ```
 
-### 1. Backend Setup
+2.  **Backend Setup (`drive-backend`)**
 
-Start by configuring and running the Node.js/Express server.
-
-1.  Navigate to the backend directory:
     ```bash
     cd drive-backend
-    ```
-
-2.  Install all backend dependencies:
-    ```bash
     npm install
+    # Create a .env file (see Environment Variables section)
+    npm start 
+    # or for development: npm run dev (if nodemon is configured)
     ```
 
-3.  Create a file named `.env` in the `drive-backend` directory and add your configurations:
-    ```
-    # --- Server Configuration ---
-    PORT=5000 
-    CLIENT_URL=http://localhost:3000 
+3.  **Frontend Setup (`drive-frontend`)**
 
-    # --- Database Configuration ---
-    MONGODB_URI=<Your_MongoDB_Connection_String>
-
-    # --- Authentication / Security ---
-    JWT_SECRET=<A_Very_Long_Random_String_For_JWT_Signing>
-    
-    # --- Google OAuth Configuration ---
-    GOOGLE_CLIENT_ID=<Your_Google_Client_ID>
-    GOOGLE_CLIENT_SECRET=<Your_Google_Client_Secret>
-    GOOGLE_CALLBACK_URL=/api/auth/google/callback 
-    ```
-
-4.  Start the backend server:
-    ```bash
-    npm start
-    # Server running on http://localhost:5000 
-    ```
-
-### 2. Frontend Setup
-
-Next, set up the React application.
-
-1.  Navigate to the frontend directory:
     ```bash
     cd ../drive-frontend
-    ```
-
-2.  Install all frontend dependencies:
-    ```bash
     npm install
-    ```
-
-3.  Create a file named `.env` in the `drive-frontend` directory to link to your backend API:
-    ```
-    VITE_API_URL=http://localhost:5000/api 
-    ```
-
-4.  Start the frontend application:
-    ```bash
     npm run dev
-    # Application typically opens on http://localhost:5173
     ```
 
-Your full-stack application is now ready!
+The backend server will run on `http://localhost:5000` (or your defined port), and the frontend will typically be accessible at `http://localhost:5173`.
+
+### Environment Variables
+
+Create a file named `.env` in the `drive-backend` directory and populate it with your configuration:
+
+```ini
+# --- General ---
+PORT=5000
+NODE_ENV=development
+CLIENT_URL=http://localhost:5173
+
+# --- MongoDB ---
+MONGO_URI=mongodb://127.0.0.1:27017/mydrive
+
+# --- JWT/Security ---
+JWT_SECRET=YOUR_VERY_SECRET_KEY
+JWT_EXPIRATION=1d 
+
+# --- Google OAuth 2.0 (For Passport) ---
+GOOGLE_CLIENT_ID=YOUR_GOOGLE_CLIENT_ID
+GOOGLE_CLIENT_SECRET=YOUR_GOOGLE_CLIENT_SECRET
+GOOGLE_CALLBACK_URL=http://localhost:5000/api/auth/google/callback
+
+# --- File Storage (Example) ---
+# This is a placeholder, actual implementation details will vary
+# For development, files are likely stored locally by Multer
+
