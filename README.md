@@ -45,15 +45,81 @@ The application is built with a powerful **MERN stack (MongoDB, Express, React, 
 | **Validation** | Data Validation | `express-validator` |
 | **File Handling** | File Uploads | `multer` |
 
-### Frontend (`drive-frontend`)
-| Category | Technology | Key Dependencies |
-| :--- | :--- | :--- |
-| **Framework** | React | `react`, `react-dom` |
-| **Build Tool** | Vite | `@vitejs/plugin-react` |
-| **Styling** | Tailwind CSS | `tailwindcss`, `autoprefixer`, `postcss` |
-| **Routing** | React Router | `react-router-dom` |
-| **HTTP Client** | API Calls | `axios` |
-| **Icons** | Icon Library | `lucide-react` |
+---
+
+## 💻 Backend API Endpoints
+
+All endpoints are prefixed with `/api/`. **Access** is either **Public** (no authentication required) or **Private** (requires a valid JWT in the `Authorization: Bearer <token>` header).
+
+### 1. Authentication (`/api/auth`)
+
+| Method | Endpoint | Description | Access |
+| :--- | :--- | :--- | :--- |
+| `POST` | `/register` | Register a new user with name, email, and password. | Public |
+| `POST` | `/login` | Authenticate and log in a user (returns JWT). | Public |
+| `GET` | `/me` | Get the current authenticated user's details. | Private |
+| `GET` | `/google` | Initiate Google OAuth process. | Public |
+| `GET` | `/google/callback` | Google OAuth callback URL. | Public |
+| `POST` | `/logout` | Log out the current user (revokes session/token). | Private |
+
+### 2. File Operations (`/api/files`)
+
+| Method | Endpoint | Description | Access |
+| :--- | :--- | :--- | :--- |
+| `POST` | `/upload` | Upload a new file (uses `multer` for `file` field). | Private |
+| `GET` | `/` | Get list of user files (supports filtering, pagination, search). | Private |
+| `GET` | `/:fileId` | Get metadata for a specific file. | Private |
+| `GET` | `/:fileId/download` | Download a file. | Private |
+| `GET` | `/:fileId/view` | View a file inline in the browser. | Private |
+| `PUT` | `/:fileId/rename` | Rename a file or update its description. | Private |
+| `PUT` | `/:fileId/move` | Move a file to a different folder. | Private |
+| `PUT` | `/:fileId/remove-from-folder` | Move a file to the root directory. | Private |
+| `DELETE`| `/:fileId` | Delete a file (moves to trash). | Private |
+| `PUT` | `/:fileId/share` | Toggle public sharing status for a file. | Private |
+
+### 3. File Sharing (Public Access) (`/api/files`)
+
+These routes allow public access to shared files.
+
+| Method | Endpoint | Description | Access |
+| :--- | :--- | :--- | :--- |
+| `GET` | `/shared/:shareToken` | Get file metadata for a publicly shared file. | Public |
+| `GET` | `/shared/:shareToken/download` | Download a publicly shared file. | Public |
+
+### 4. Folder Operations (`/api/folders`)
+
+| Method | Endpoint | Description | Access |
+| :--- | :--- | :--- | :--- |
+| `POST` | `/` | Create a new folder. | Private |
+| `GET` | `/` | Get list of user folders. | Private |
+| `GET` | `/:folderId` | Get details for a specific folder. | Private |
+| `PUT` | `/:folderId` | Update a folder (e.g., rename). | Private |
+| `DELETE`| `/:folderId` | Delete a folder (moves to trash). | Private |
+
+### 5. Trash Management (`/api/trash`)
+
+| Method | Endpoint | Description | Access |
+| :--- | :--- | :--- | :--- |
+| `POST` | `/move` | Move a file or folder to the trash. | Private |
+| `POST` | `/restore` | Restore a file or folder from the trash. | Private |
+| `DELETE`| `/delete` | Permanently delete a file or folder from the trash. | Private |
+| `DELETE`| `/empty` | Permanently empty the entire trash bin. | Private |
+| `GET` | `/` | Get list of items currently in the trash. | Private |
+
+### 6. Share Link Generation (`/api/share`)
+
+These routes handle the creation and management of advanced share links (with potential passwords/expirations).
+
+| Method | Endpoint | Description | Access |
+| :--- | :--- | :--- | :--- |
+| `POST` | `/` | Generate a new, specific share link for a file. | Private |
+| `GET` | `/` | Get a list of the user's active share links. | Private |
+| `GET` | `/:token` | Redirects to the front-end view page for the shared content. | Public |
+| `GET` | `/:token/info` | Get public metadata for a password-protected/private share token. | Public |
+| `POST` | `/:token/download` | Download a shared file (allows password submission). | Public |
+| `DELETE`| `/:shareId` | Revoke a specific share link. | Private |
+
+
 
 ## 🚀 Getting Started
 
@@ -97,7 +163,7 @@ The backend server will run on `http://localhost:5000` (or your defined port), a
 
 Create a file named `.env` in the `drive-backend` directory and populate it with your configuration:
 
-```ini
+```init
 # --- General ---
 PORT=5000
 NODE_ENV=development
@@ -115,7 +181,10 @@ GOOGLE_CLIENT_ID=YOUR_GOOGLE_CLIENT_ID
 GOOGLE_CLIENT_SECRET=YOUR_GOOGLE_CLIENT_SECRET
 GOOGLE_CALLBACK_URL=http://localhost:5000/api/auth/google/callback
 
+```
+
 # --- File Storage (Example) ---
 # This is a placeholder, actual implementation details will vary
 # For development, files are likely stored locally by Multer
+
 
