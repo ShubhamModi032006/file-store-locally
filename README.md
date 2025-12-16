@@ -1,6 +1,6 @@
 # ☁️ SecureDrive: Your Personal Cloud Storage Solution
 
-### File Store Locally | Full-Stack MERN Application
+### File Store Locally |  MERN-STACK Application
 
 [![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)](https://nodejs.org/)
 [![Express.js](https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white)](https://expressjs.com/)
@@ -185,6 +185,7 @@ GOOGLE_CALLBACK_URL=http://localhost:5000/api/auth/google/callback
 ### --- File Storage (Example) ---
 ### This is a placeholder, actual implementation details will vary
 ### For development, files are likely stored locally by Multer
+
 
 
 
