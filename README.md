@@ -7,7 +7,6 @@
 [![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://reactjs.org/)
 [![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white)](https://www.mongodb.com/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
-[![License: ISC](https://img.shields.io/badge/License-ISC-blue.svg)](https://opensource.org/licenses/ISC)
 
 ---
 ## ✨ Overview
@@ -186,6 +185,7 @@ GOOGLE_CALLBACK_URL=http://localhost:5000/api/auth/google/callback
 ### --- File Storage (Example) ---
 ### This is a placeholder, actual implementation details will vary
 ### For development, files are likely stored locally by Multer
+
 
 
 
