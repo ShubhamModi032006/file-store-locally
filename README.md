@@ -14,6 +14,12 @@ This repository contains a full-stack cloud storage application designed for sec
 
 ## ✨ Live Demo / Animation
 
+---
+
+**[ ADD YOUR DEMO GIF/ANIMATION HERE ]**
+
+```
+
 ## 🚀 Features
 
 - Secure multi-file upload with preview support  
@@ -24,11 +30,6 @@ This repository contains a full-stack cloud storage application designed for sec
 - Real-time UI updates for better user experience  
 
 ---
-**[ ADD YOUR DEMO GIF/ANIMATION HERE ]**
-
----
-
-## 🚀 Features
 
 The application is built with a comprehensive set of features for a modern file management experience:
 
@@ -132,4 +133,5 @@ Follow these steps to set up the project locally.
     The frontend will typically run on `http://localhost:5173` or `http://localhost:3000`.
 
 You are now ready to use the application!
+
 
