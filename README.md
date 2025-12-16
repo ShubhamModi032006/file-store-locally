@@ -16,6 +16,7 @@ This repository contains a full-stack cloud storage application designed for sec
 
 **[ ADD YOUR DEMO GIF/ANIMATION HERE ]**
 
+---
 
 ## 🚀 Features
 
@@ -130,6 +131,7 @@ Follow these steps to set up the project locally.
     The frontend will typically run on `http://localhost:5173` or `http://localhost:3000`.
 
 You are now ready to use the application!
+
 
 
 
