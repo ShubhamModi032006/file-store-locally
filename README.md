@@ -183,8 +183,9 @@ GOOGLE_CALLBACK_URL=http://localhost:5000/api/auth/google/callback
 
 ```
 
-# --- File Storage (Example) ---
-# This is a placeholder, actual implementation details will vary
-# For development, files are likely stored locally by Multer
+### --- File Storage (Example) ---
+### This is a placeholder, actual implementation details will vary
+### For development, files are likely stored locally by Multer
+
 
 
