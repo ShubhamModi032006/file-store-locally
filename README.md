@@ -1,5 +1,3 @@
-﻿# file-store-locally
-
 # File Store – Local File Management Application
 
 A full-stack local file management system that allows users to securely upload, manage, preview, and share files with permission-based access. The application focuses on secure file handling, scalable REST APIs, and smooth client–server interaction.
@@ -62,3 +60,4 @@ A full-stack local file management system that allows users to securely upload, 
 1. Clone the repository  
    ```bash
    git clone https://github.com/ShubhamModi032006/file-store-locally.git
+
