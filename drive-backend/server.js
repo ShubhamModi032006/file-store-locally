@@ -9,6 +9,10 @@ require('dotenv').config();
 
 // Custom modules
 const connectDB = require('./config/database');
+const {
+  allowedOrigins,
+  pickValidOrigin,
+} = require('./config/clientOrigins');
 
 const { handleUploadErrors } = require('./middleware/upload');
 require('./config/passport');
@@ -27,8 +31,17 @@ app.use(compression());
 
 // Secure CORS Configuration
 const corsOptions = {
-  origin: process.env.CLIENT_URL, // e.g., 'http://localhost:3000'
-  optionsSuccessStatus: 200 
+  origin: (origin, callback) => {
+    if (!origin) {
+      return callback(null, pickValidOrigin());
+    }
+    if (allowedOrigins.includes(origin.replace(/\/$/, ''))) {
+      return callback(null, true);
+    }
+    return callback(new Error('CORS not allowed'));
+  },
+  credentials: true,
+  optionsSuccessStatus: 200,
 };
 
 app.use(cors(corsOptions));

@@ -3,12 +3,53 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
 const { validationResult } = require('express-validator');
+const {
+  allowedOrigins,
+  pickValidOrigin,
+} = require('../config/clientOrigins');
 
 // Generate JWT Token
 const generateToken = (userId) => {
   return jwt.sign({ id: userId }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRE
   });
+};
+
+const base64UrlEncode = (input) => {
+  return Buffer.from(JSON.stringify(input))
+    .toString('base64')
+    .replace(/\+/g, '-')
+    .replace(/\//g, '_')
+    .replace(/=+$/, '');
+};
+
+const base64UrlDecode = (input) => {
+  if (!input) return null;
+  try {
+    const padded = input.replace(/-/g, '+').replace(/_/g, '/');
+    const buffer = Buffer.from(padded, 'base64');
+    return JSON.parse(buffer.toString());
+  } catch (error) {
+    console.warn('Failed to decode OAuth state:', error.message);
+    return null;
+  }
+};
+
+const sanitizeRedirectOrigin = (origin) => {
+  if (!origin) return null;
+  const normalized = origin.replace(/\/$/, '');
+  return allowedOrigins.includes(normalized) ? normalized : null;
+};
+
+const resolveRedirectOrigin = (req) => {
+  const stateData = base64UrlDecode(req.query.state);
+  if (stateData?.redirect) {
+    const origin = sanitizeRedirectOrigin(stateData.redirect);
+    if (origin) {
+      return origin;
+    }
+  }
+  return pickValidOrigin();
 };
 
 // Register user
@@ -93,41 +134,6 @@ exports.login = async (req, res) => {
     res.status(500).json({ message: 'Server error', error: error.message });
   }
 };
-
-// Get current user
-exports.getMe = async (req, res) => {
-  try {
-    const user = await User.findById(req.user.id).select('-password');
-    res.json({ user });
-  } catch (error) {
-    console.error('Get me error:', error);
-    res.status(500).json({ message: 'Server error', error: error.message });
-  }
-};
-
-// Google OAuth
-exports.googleAuth = passport.authenticate('google', {
-  scope: ['profile', 'email']
-});
-
-// Google OAuth callback
-exports.googleAuthCallback = (req, res, next) => {
-  passport.authenticate('google', { session: false }, (err, user, info) => {
-    if (err) {
-      return res.status(500).json({ message: 'Authentication failed', error: err.message });
-    }
-    
-    if (!user) {
-      return res.redirect(`${process.env.CLIENT_URL}/login?error=auth_failed`);
-    }
-
-    const token = generateToken(user._id);
-    
-    // Redirect to frontend with token
-    res.redirect(`${process.env.CLIENT_URL}/dashboard?token=${token}`);
-  })(req, res, next);
-};
-
 
 // Get current user
 exports.getMe = async (req, res) => {
