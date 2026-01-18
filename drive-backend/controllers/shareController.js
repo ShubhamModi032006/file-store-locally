@@ -83,11 +83,22 @@ exports.getShareInfo = async (req, res) => {
 exports.accessSharedFile = async (req, res) => {
   try {
     const { token } = req.params;
-    if (!process.env.CLIENT_URL) {
-      console.error('FATAL: CLIENT_URL is not defined in the .env file.');
+    if (!process.env.CLIENT_URL && !process.env.CLIENT_URLS) {
+      console.error('FATAL: CLIENT_URL/CLIENT_URLS is not defined in the .env file.');
       return res.status(500).send('Server configuration error.');
     }
-    return res.redirect(`${process.env.CLIENT_URL}/share/${token}`);
+
+    const getRedirectOrigin = () => {
+      if (req.query?.redirect) {
+        return req.query.redirect.replace(/\/$/, '');
+      }
+      if (process.env.CLIENT_URLS) {
+        return process.env.CLIENT_URLS.split(',')[0].trim().replace(/\/$/, '');
+      }
+      return process.env.CLIENT_URL.replace(/\/$/, '');
+    };
+
+    return res.redirect(`${getRedirectOrigin()}/share/${token}`);
   } catch (error) {
     console.error('Share link redirect error:', error);
     return res.status(500).send('Error redirecting to the share page.');
