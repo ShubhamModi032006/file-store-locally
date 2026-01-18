@@ -21,7 +21,10 @@ const ShareModal = ({ file, onClose }) => {
       );
       
       // Also, update the shareUrl to point to the frontend, not the backend API
-      const frontendUrl = `${window.location.origin}/share/${result.token}`;
+      const frontendOrigin = process.env.NODE_ENV === 'production'
+        ? (import.meta.env.VITE_FRONTEND_URL || window.location.origin)
+        : window.location.origin;
+      const frontendUrl = `${frontendOrigin.replace(/\/+$/, '')}/share/${result.token}`;
       setShareUrl(frontendUrl);
       
     } catch (error) {

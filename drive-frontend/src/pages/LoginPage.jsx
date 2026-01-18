@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Eye, EyeOff, HardDrive } from 'lucide-react';
-import apiClient from '../api/apiClient';
+import apiClient, { getApiHost } from '../api/apiClient';
 
 const LoginPage = ({ onLogin, onSwitchToRegister }) => {
   const [email, setEmail] = useState('');
@@ -103,7 +103,7 @@ const LoginPage = ({ onLogin, onSwitchToRegister }) => {
           </div>
 
           <a
-            href="/api/auth/google"
+            href={getApiHost() ? `${getApiHost()}/api/auth/google` : '/api/auth/google'}
             className="mt-3 w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-lg shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
           >
             <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24">

@@ -8,7 +8,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://localhost:5000', // IMPORTANT: Change this to your backend server's address
+        target: 'http://localhost:5000' || "SERVER_URL=https://store-sys.onrender.com",
         changeOrigin: true,
       },
     },

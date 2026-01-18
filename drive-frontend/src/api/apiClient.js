@@ -1,4 +1,10 @@
-const API_BASE = '/api';
+const apiHost = import.meta.env.VITE_API_URL
+  ? import.meta.env.VITE_API_URL.replace(/\/+$/, '')
+  : '';
+
+const API_BASE = apiHost ? `${apiHost}/api` : '/api';
+
+export const getApiHost = () => apiHost;
 
 class APIClient {
   getAuthToken() {

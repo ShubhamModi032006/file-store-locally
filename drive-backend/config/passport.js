@@ -5,6 +5,15 @@ const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
 const User = require('../models/User');
 
+const serverBaseUrl = process.env.SERVER_URL
+  ? process.env.SERVER_URL.replace(/\/+$/, '')
+  : '';
+const googleCallbackURL = serverBaseUrl
+  ? `${serverBaseUrl}/api/auth/google/callback`
+  : '/api/auth/google/callback';
+
+console.log('[passport] Google OAuth callback URL:', googleCallbackURL);
+
 // JWT Strategy
 passport.use(new JwtStrategy({
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
@@ -25,7 +34,7 @@ passport.use(new JwtStrategy({
 passport.use(new GoogleStrategy({
   clientID: process.env.GOOGLE_CLIENT_ID,
   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-  callbackURL: "/api/auth/google/callback"
+  callbackURL: googleCallbackURL
 }, async (accessToken, refreshToken, profile, done) => {
   try {
     let user = await User.findOne({ googleId: profile.id });
